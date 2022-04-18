@@ -2,6 +2,7 @@ import os
 import json
 import logging
 from flask import Flask, render_template, request, session, make_response, Response
+from twilio.twiml.messaging_response import Body, Message, Redirect, MessagingResponse
 
 
 app = Flask(__name__)
@@ -14,11 +15,12 @@ log = logging.getLogger()
 @app.route("/", methods=['POST'])
 def home():
     log.info("going home!!")
-    log.info(request.headers)
-    # log.info(request.json)
-    data = {"rc": 0, "msg": "Process OK"}
-    return Response(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': ')),
-                    200, mimetype='application/json')
+    response = MessagingResponse()
+    message = Message()
+    message.body('Hello World!')
+    response.append(message)
+    return Response(response.to_xml(),
+                    200, mimetype='application/xml')
 
 
 # Press the green button in the gutter to run the script.
