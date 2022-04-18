@@ -14,7 +14,8 @@ log = logging.getLogger()
 @app.route("/", methods=['POST'])
 def home():
     log.info("going home!!")
-    log.info(request.json)
+    log.info(request.headers)
+    # log.info(request.json)
     data = {"rc": 0, "msg": "Process OK"}
     return Response(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': ')),
                     200, mimetype='application/json')
