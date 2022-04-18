@@ -17,7 +17,7 @@ def home():
     log.info("going home!!")
     response = MessagingResponse()
     message = Message()
-    message.body('Hello World!')
+    message.body('THIS IS A DEMO MESSAGE')
     response.append(message)
     return Response(response.to_xml(),
                     200, mimetype='application/xml')
